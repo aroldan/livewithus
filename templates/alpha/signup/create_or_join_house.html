@@ -1,0 +1,30 @@
+<div id="newhouse">
+	<img src="/site_media/img/house.png" alt="Create a new house" />
+	<p class="join-house-big-text">Create a new House</p>
+	<form action="/lw/signup/do_createhouse/" method="post">
+		<b>Name: </b><input type="text" name="hname" value="My House" /><br /><br />
+		<input type="submit" value="Create a new House!" />
+	</form>
+</div>
+<div id="joinhouse">
+	<img src="/site_media/img/joinhouse.png" alt="Join an existing house" />
+	<p class="join-house-big-text">Join a house</p>
+	<p>You'll need an invitation code or email from someone already in the house.</p>
+	<form action="/lw/signup/joinhouse/" method="get">
+		<div id="formerrors">
+		{{jhform.invite_code.errors}}
+		</div>
+		{{jhform.invite_code}}
+		<input type="submit" value="Validate Code" />
+	</form>
+	<br />
+	{% if aclist %}
+	<p>You've also been invited to the following houses below. Select an invite to accept:</p>
+	<form action="/lw/signup/joinhouse/" method="get">
+	{{aclist.invite_code}}
+	<input type="submit" value="Join this House!" />
+	</form>
+	{% endif %}
+</div>
+<div id="clearbox">
+</div>

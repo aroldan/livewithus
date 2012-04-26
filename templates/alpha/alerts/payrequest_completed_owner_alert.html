@@ -1,0 +1,5 @@
+{% extends "alpha/alerts/base_alert.html" %}
+{% block alert-content %}
+You asked {{alert.related_objects.person}} for ${{alert.related_objects.amount}}{% if alert.related_objects.description %} regarding {{alert.related_objects.description}}{% endif %}.
+<b>Update: </b> {{alert.related_objects.person}} has {{alert.related_objects.outcome}}.
+{% endblock %}

@@ -1,0 +1,6 @@
+<form action="{{house.get_absolute_url}}finances/settle_up_handler/" method="post">
+	{% for debt_dct in house.get_house_debt_totals %}
+		<input type="text" name="{{debt_dct.person.pk}}" value="{{debt_dct.amount}}"/>
+	{% endfor %}
+	<input type="submit" />
+</form>

@@ -1,0 +1,10 @@
+{% load humanizetime %}
+{% for chat in chats %}
+	{% include "alpha/chatter/chat.html" %}
+	<div class="chat-child">
+		{% for chat in chat.child_set.all %}
+			{% include "alpha/chatter/chat.html" %}
+		{% endfor %}
+		{% include "alpha/chatter/chat_form.html" %}
+	</div>
+{% endfor %}

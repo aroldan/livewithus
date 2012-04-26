@@ -1,0 +1,29 @@
+{% extends "alpha/base_template.html" %}
+
+{% comment %}
+----------------------------------------
+
+Template for front page with no sidebar.
+Overrides sidebar-relevant CSS and removes the DIV from the page.
+
+----------------------------------------
+{% endcomment %}
+
+
+{% block sidebar_css %}
+{% endblock %}
+{% block sidebar_div %}
+{% endblock %}
+
+<div id="top-bar-nav">
+{% block nav-area %}
+		<li><a href="/analytics/">Dashboard</a></li>
+		{% if house %}
+		<li><a href="/analytics/{{house.pk}}/">House Overview</a></li>
+		<li><a href="/analytics/{{house.pk}}/chatter/">Chatter</a></li>
+		<li><a href="/analytics/{{house.pk}}/finances/">Finances</a></li>
+		{% endif %}
+		<li><a href="/analytics/push_alerts/">Send Alerts</a></li>
+	</ul>
+{% endblock %}
+</div>

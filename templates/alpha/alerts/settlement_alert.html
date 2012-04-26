@@ -1,0 +1,24 @@
+{% extends "alpha/alerts/base_alert_nobutton.html" %}
+{% load math_stuff %}
+
+{% block alert-content %}
+{{alert.relate_objects.debt}}
+{{alert.related_objects.debt.transaction.get_banker}} has requested that the house settle up.
+{% if alert.related_objects.debt.value < 0 %}
+	You owe a total of ${{alert.related_objects.debt.value|absolutevalue}}. Because {{alert.related_objects.debt.transaction.get_banker}} is acting as banker, make sure you pay them the full amount you owe. 
+{% else %}
+	You are owed a total of ${{alert.related_objects.debt.value|absolutevalue}}. Because {{alert.related_objects.debt.transaction.get_banker}} is acting as banker, 
+	they will pay you the full amount you are owed.  
+{% endif %}
+<br />
+
+<form action="/lw/alerts/{{alert.pk}}/refuse/" method="POST">
+	<input type="submit" value="Refuse" />
+	<input type="hidden" value={{alert.pk}}>
+</form>
+<form action="/lw/alerts/{{alert.pk}}/pay/" method="POST">
+	<input type="submit" value="Report Payment" />
+	<input type="hidden" value={{alert.pk}}>
+</form>
+
+{% endblock %}

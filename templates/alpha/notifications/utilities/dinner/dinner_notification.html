@@ -1,0 +1,10 @@
+{% extends "alpha/notifications/base_email_template.html" %} 
+{% block content %}
+<p>Hey {{ac.person.displayName}}, </p>
+<p>We noticed you haven't let your house know what you're doing for dinner tonight. 
+Why don't you take a moment and hop on over to <a href="http://www.livewith.us/lw">livewith.us</a>
+and fill out your dinner plans for the night.</p>
+
+<p>Thanks,</p>
+<p>The livewith.us Dinner Manager</p>
+{% endblock %}

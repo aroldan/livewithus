@@ -1,0 +1,4 @@
+{% extends "alpha/alerts/base_alert.html" %}
+{% block alert-content %}
+<b>Pending:</b> You asked {{alert.related_objects.new_person_name}} for ${{alert.related_objects.amount}}{% if alert.related_objects.description %} regarding {{alert.related_objects.description}}{% endif %}.
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "alpha/alerts/base_alert.html" %}
+{% block alert-content %}
+{{alert.related_objects.creator}} has modified the <a href="{{alert.related_objects.url}}">settlement</a> made on {{alert.related_objects.date}}
+
+{% endblock %}

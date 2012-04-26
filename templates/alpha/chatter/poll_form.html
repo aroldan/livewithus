@@ -1,0 +1,8 @@
+<form action="/lw/chathandler/" method="post">
+    {{ form.text }}<br />
+    {{ form.publicly_editable }}Wiki?<br />
+    {{ form.sticky }}Sticky?<br />
+    <input type="hidden" value={{chat.pk}} name="parent" id="id_parent" />
+    <input type="hidden" value={{house.pk}} name="house" id="id_house" />
+	{% if chat %}<input type="submit" value="Post Reply" />{% else %}<input type="submit" value="Post Chatter" />{% endif %}
+</form>

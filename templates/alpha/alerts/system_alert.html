@@ -1,0 +1,5 @@
+{% extends "alpha/alerts/base_alert.html" %}
+{% block alert-content %}
+<strong>System Wide Alert:</strong><br />
+{{alert.related_objects.text}} 
+{% endblock %}

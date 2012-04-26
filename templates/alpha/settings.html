@@ -1,0 +1,26 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+{% load image_sizing %}
+
+{% block title %} | alpha | settings {% endblock %}
+
+{% block content %}
+<h2>{{person.displayName}}'s livewith.us settings</h2>
+
+<form action="/lw/apply_settings/" method="post" enctype="multipart/form-data">
+	  {% for field in form %}
+	  <div class="form-field">
+	  {% ifequal field.name "avatar" %}
+	  	{% if person.avatar %}
+	  	<img src="{{person.avatar|get_size_url:'settingsthumb'}}" width="45" height="45" />
+	  	{% else %}
+	  	<img src="/site_media/img/blank_user_small.gif" width="45" height="45" />
+	  	{% endif %}
+	  {% endifequal %}
+	    {{ field.errors }}
+	    {{ field.label_tag }}: {{ field }}
+    </div>
+    {% endfor %}
+	<input type="submit" value="Update Settings" />
+</form>
+		
+{% endblock %}

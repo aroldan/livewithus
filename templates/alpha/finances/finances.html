@@ -1,0 +1,42 @@
+{% extends "alpha/base_template.html" %}
+
+{% block addl_scripts %}
+<script type="text/javascript" src="/site_media/js/finance-all.js"></script>
+{% endblock %}
+
+{% block title %} | alpha | finances {% endblock %}
+
+{% block content %}
+<h2>Finances</h2>
+
+{% if purchases|length_is:"0" %}
+<p>No items to display. Have you bought something? <a href="{{house.get_absolute_url}}finances/new/">Enter it in!</a></p>
+{% else %}
+<a href="/lw/{{house.pk}}/finances/purchases/">My Purchases</a><br />
+<a href="/lw/{{house.pk}}/finances/debts/">My Debts</a><br />
+<a href="/lw/{{house.pk}}/finances/settlements/">Settlements</a><br />
+<a href="/lw/{{house.pk}}/finances/all/">All</a><br /><br />
+
+<table class="finance-table">
+	<tr>
+		<th scope="col">
+		</td>
+		<th scope="col">
+			<b>Date</b>
+		</th>
+		<th scope="col">
+			<b>Vendor</b>
+		</th>
+		<th scope="col">
+			<b>Item</b>
+		</th>
+		<th scope="col">
+			You Paid
+		</th>
+	</tr>
+{% for purchase in purchases %}
+	{% include "alpha/finances/transaction_display.html" %}
+{% endfor %}
+</table>
+{% endif %}
+{% endblock %}

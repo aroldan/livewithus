@@ -1,0 +1,13 @@
+{% extends "alpha/base_template_analytics.html" %}
+
+{%block content%}
+
+<form action="/analytics/do_push/" method="post">
+<h1>Write Alert:</h1>
+<textarea rows="10" cols="30" name="text">
+Write your alert here.
+</textarea><br />
+<input type="submit" />
+</form>
+
+{% endblock %}

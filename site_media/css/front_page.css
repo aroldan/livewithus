@@ -1,0 +1,58 @@
+/*
+For: livewith.us
+Authors: Avery M Anderson
+Anthony L Roldan
+
+copyright 2010 livewith.us
+*/
+#lwu-stuff-container {
+	background: #FFF url('/site_media/img/frontpage/top_area_back.png') bottom repeat-x;
+	height:400px;
+	width:100%;
+}
+#lwu-stuff-left {
+	width:500px;
+	margin-left:20px;
+	height:100%;
+	float:left;
+}
+	#lwu-stuff-left img {
+		margin-top:30px;
+		margin-left:20px;
+	}
+#lwu-stuff-right {
+	float:right;
+	width:300px;
+	height:320px;
+	margin-right:75px;
+	margin-top:45px;
+	background: url('/site_media/img/frontpage/start_lwu.png') center top no-repeat;
+}
+#lwu-features-select {
+	margin-top:0px;
+	clear:both;
+	height: 70px;
+	width:100%;
+	background: url('/site_media/img/frontpage/bottom_buttons.png') bottom repeat-x;
+}
+#features-select ul{
+	list-style:none;
+	margin-top:0px;
+}
+	#features-select li {
+		margin-top:2px;
+		padding-top:26px;
+		display:block;
+		width:299px;
+		height:70px;
+		font-weight:bold;
+		font-family:Trebuchet MS, Helvetica, Arial, sans-serif;
+		text-align:center;
+		float:left;
+		font-size:30pt;
+		color:#333;
+		background: url('/site_media/img/frontpage/bottom_buttons_divider.png') right top no-repeat;
+	}
+	#features-select li:last-child {
+		background: none;
+	}

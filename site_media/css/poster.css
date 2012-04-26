@@ -1,0 +1,68 @@
+body,html { 
+	font:12px/1.4em Verdana,sans-serif;
+	
+	margin: 0;
+	padding: 0;
+	padding-top:4px;
+	color: #000;
+	background: #009999 url("/site_media/img/front_background.gif") repeat-x;
+
+}
+
+#wrap {
+	width: 760px;
+	
+	background-color:#fff;
+	
+	border:solid black 2px;
+	
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+#clearbox {
+	/* spacing element, clears floating divs and adds attractive spacing above */
+	clear:both;
+	padding-top:30px;
+}
+#login-area {
+	background:#fff;
+	text-align:right;
+	padding-right: 5px;
+	padding-top: 2px;
+}
+#header {
+	text-align:center;
+}
+#nav {
+	background:#fff;
+	height:35px;
+	text-align:center;
+}
+#nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#nav li {
+	display:inline;
+	margin:0;
+	padding:0;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+#content {
+	padding-left: 15px;
+	padding-right:15px;
+}
+
+#footer {
+	font:10px Verdana,sans-serif; 
+	text-align:center;
+	
+	margin-top: 200px;
+	border-top: solid black 1px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	background:#FFF;
+	clear:both;
+}

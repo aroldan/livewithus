@@ -1,0 +1,37 @@
+{% if forloop.counter|divisibleby:"2" %}
+<tr class="finance-row odd-row">
+{% else %}
+<tr class="finance-row even-row">
+{% endif %}
+		<td class="finance-is-mine-icon">
+			{% if purchase.creator.downcast == user.get_profile %}<img src="/site_media/img/led-icons/money.png" title="Purchased by me" width="16" height="16" />{% endif %}
+		</td>
+		<td class="finance-date">
+			{{purchase.purchase_date|date:"n/j"}}
+		</td>
+		<td class="finance-vendor">
+			{% if purchase.vendor %}
+				{{purchase.vendor.name}}
+			{% else %}
+				{{purchase.banker.displayName}}
+			{% endif %}
+		</td>
+		<td class="finance-description">
+			<a class="finance-details-link" href="/lw/{{house.pk}}/finances/{{purchase.pk}}/details/"></a>
+			{% if purchase.vendor %}
+				{{purchase.description}}
+			{% else %}
+				Settlement {% if purchase.description %} re: {{purchase.description}}{% endif %}
+			{% endif %}
+
+		</td>
+		<td>
+			{% if purchase.creator.downcast == user.get_profile %}
+			{# if this was purchased by the current user, show total #}
+			${{purchase.amount}}
+			{% else %}
+			{# otherwise, show the amount owed #}
+			{% if not purchase.debt.amount %}$0.00{% else %}${{purchase.debt.amount}}{% endif %}
+			{% endif %}
+		</td>
+</tr>

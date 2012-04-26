@@ -1,0 +1,104 @@
+{% extends "alpha/base_template.html" %}
+
+{% load math_stuff %}
+
+{% block addl_scripts %}
+{% endblock %}
+
+{% block title %} | finances | settle up{% endblock %}
+
+{% block content %}
+<h2>Settle Up</h2>
+
+<div class="settle-description">
+	<p>Settling up allows you and your housemates to settle your debts to each other.</p>
+	<p>If you initate a house settlement, you act as "banker" and will be responsible for collecting money from the
+	people on the left and giving money to the people on the right.</p>
+	<p>Here's what'll happen:</p>
+</div>
+<div class="settle-contents-main">
+	{% if negative_debts|length > 0 %}
+	<div class="settle-person-listing settle-owes">
+		<div class="settle-person-header">
+			Owes Money
+		</div>
+		<div class="settle-person-listing-person">
+			{% for debt_dct in negative_debts %}
+				{% if debt_dct.person != user.get_profile %}
+				<div class="finance-detail-person">
+					<img src="{{debt_dct.person.get_sm_avatar}}" alt="{{debt_dct.person.displayName}}: {{debt_dct.amount|absolutevalue}}" title="{{debt_dct.person.displayName}}: ${{debt_dct.amount|absolutevalue}}" width="20" height="20" />${{debt_dct.amount|absolutevalue}}
+				</div>
+				{% endif %}
+			{% endfor %}
+			<div class="clear"></div>
+		</div>
+	</div>
+	{% endif %}
+	<div class="settle-banker-listing">
+		<div class="settle-banker-arrow-left">
+		</div>
+		<div class="settle-banker-center">
+				<div>You (banker)</div>
+					{% if my_debt.amount > 0 %}
+						<div><img src="/site_media/img/payment_arrow_positive.png" width="20" height="28" /></div>
+						<div>${{my_debt.amount}}</div>
+					{% endif %}
+				<div><img src="{{my_debt.person.get_avatar}}" alt="{{my_debt.person.displayName}}: {{my_debt.amount|absolutevalue}}" title="{{my_debt.person.displayName}}: ${{my_debt.amount|absolutevalue}}" width="30" height="30" /></div>
+					{% if my_debt.amount <= 0 %}
+						<div><img src="/site_media/img/payment_arrow_negative.png" width="20" height="28" /></div>
+						<div>${{my_debt.amount|absolutevalue}}</div>
+					{% endif %}
+		</div>
+		<div class="settle-banker-arrow-right">
+		</div>
+	</div>
+	{% if positive_debts|length > 0 %}
+	<div class="settle-person-listing settle-owed">
+		<div class="settle-person-header">
+			Owed Money
+		</div>
+		<div class="settle-person-listing-person">
+			{% for debt_dct in positive_debts %}
+				{% if debt_dct.person != user.get_profile %}
+				<div class="finance-detail-person">
+					<img src="{{debt_dct.person.get_sm_avatar}}" alt="{{debt_dct.person.displayName}}: {{debt_dct.amount|absolutevalue}}" title="{{debt_dct.person.displayName}}: ${{debt_dct.amount|absolutevalue}}" width="20" height="20" />${{debt_dct.amount|absolutevalue}}
+				</div>
+				{% endif %}
+			{% endfor %}
+			<div class="clear"></div>
+		</div>
+	</div>
+	{% endif %}
+	<div class="clear"></div>
+</div>
+<form action="/lw/{{house.id}}/finances/settle_up_handler/" method="post" class="settle-form">
+{% for debt_dct in positive_debts %}
+<input type="hidden" name="amount_{{debt_dct.person.pk}}" value="{{debt_dct.amount}}" />
+{% endfor %}	
+{% for debt_dct in negative_debts %}
+<input type="hidden" name="amount_{{debt_dct.person.pk}}" value="{{debt_dct.amount}}" />
+{% endfor %}	
+<input type="hidden" name="amount_{{my_debt.person.pk}}" value="{{my_debt.amount}}" />
+<div class="settle-summary">
+	<p>If you settle up, you'll {% if negative_debts|length > 0 %}have to collect money from{% endif %}
+	{% spaceless %}
+	{% for debt_dct in negative_debts %}{%if forloop.last and not forloop.first %} and {%endif%}{% if not forloop.first and not forloop.last %}, {% endif %}{{debt_dct.person.displayName}}{%endfor%}
+	{%if positive_debts|length > 0%}{% if negative_debts|length > 0 %}and {%endif%}pay money to{%endif%}
+	{% for debt_dct in positive_debts %}{%if forloop.last and not forloop.first %} and {%endif%}{% if not forloop.first and not forloop.last %}, {% endif %}{{debt_dct.person.displayName}}{%endfor%}.
+	</p>
+	<p>
+	{% if my_debt.amount > 0 %}
+	You'll collect a total of ${{total_collect}} and pay a total of ${{total_give}} to others, and pocket ${{my_debt.amount|absolutevalue}}.
+	{% else %}
+	You'll collect a total of ${{total_collect}} and pay a total of ${{total_give}} to others, including ${{my_debt.amount|absolutevalue}} of your own money.
+	{% endif %}
+	</p>
+	{% endspaceless %}
+	<label>Message to your housemates about this settlement: (optional)
+	<textarea name="description"></textarea>
+	</label>
+	<input type="submit" value="Ok, do it!" class="settle-submit-button" />
+	<div class="clear"></div>
+	</div>
+{% endblock %}
+</form>

@@ -1,0 +1,8 @@
+{% extends "alpha/notifications/base_email_template.html" %}
+{% block content %}
+<p>Hey! {{ac.creator.displayName}} has posted some new chatter in your House:</p>
+
+<p>{{ac.text|urlize|linebreaks}}</p>
+
+<p>Reply by going to <a href="http://livewith.us/lw/{{ac.house.id}}/">"http://livewith.us/lw/{{ac.house.id}}/</a>.</p>
+{% endblock %}

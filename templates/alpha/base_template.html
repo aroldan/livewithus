@@ -1,0 +1,140 @@
+{% load image_sizing %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Livewith.us {% block title %} | alpha {% endblock %}</title>
+		
+		<link href="/site_media/css/default.css" rel="stylesheet" />
+		{% block sidebar_css %}
+		<link href="/site_media/css/sidebar.css" rel="stylesheet" />
+		{% endblock %}
+		{% block addl_css %}
+		{% endblock %}
+		
+		<script type="text/javascript" src="/site_media/js/jquery-1.4.2.min.js"></script>
+		<link type="text/css" href="/site_media/css/overcast/jquery-ui-1.8.1.custom.css" rel="Stylesheet" />	
+		<script type="text/javascript" src="/site_media/js/jquery-ui-1.8.1.custom.min.js"></script>
+		<script type="text/javascript" src="/site_media/js/highcharts/js/highcharts.js"></script>	
+		
+		{% block addl_scripts %}
+		{% endblock %}
+	
+	</head>
+	<body>
+		<div id="top-bar">
+			<div id="top-bar-center">
+				<div id="top-bar-logo" onclick="location.href='/lw/'"></div>
+				
+				<div id="login-area">
+					{% block login-area %}
+						{% if person %}
+							Welcome, <strong>{{person.displayName}}</strong>. <a href="/lw/settings/">Settings</a> | <a href="/lw/logout/">Log out</a>
+						{% else %}
+							{% include "alpha/login_form.html" %}
+						{% endif %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+		<div id="wrap">
+			<div id="secondary-header">
+				<div id="top-bar-nav">
+				{% block nav-area %}
+				<ul class="top-bar-nav">
+					{% if person %}
+						<li><a href="{{house.get_absolute_url}}dashboard/">Home</a></li>
+						<li><a href="{{house.get_absolute_url}}finances/all/">Finances</a></li>
+						<li id="new-item-button"><a href="{{house.get_absolute_url}}finances/new/">New Purchase</a></li>
+						<li><a href="{{house.get_absolute_url}}finances/settle_up/">Settle Up</a></li>
+						{% if user.is_staff %}
+							<li class="float-right"><a href="/analytics/">Analytics</a></li>
+						{% endif %}
+						<li class="float-right"><a href="http://spreadsheets.google.com/viewform?formkey=dG5pRVFPa3Y5SDFDb082ekhZczZ4VGc6MQ">Give Us Feedback</a></li>
+					{% else %}
+						<li><a href="/">Home</a></li>
+						<li><a href="/pages/about/">About</a></li>
+						<li id="new-item-button"><a href="/pages/contact">Contact</a></li>
+					{% endif %}
+					</ul>
+				{% endblock %}
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+			{% block page_content_override %}
+			<div id="content">
+				{% block message-area %}
+					{% if messages %}
+						<div id="messages">
+							<ul>
+	    					{% for message in messages %}
+	    						<li>{{ message }}</li>
+	    					{% endfor %}
+							</ul>
+						</div>
+					{% endif %}
+				{% endblock %}
+				{% block content %}
+					<p>Page content goes here.</p>
+				{% endblock %}
+			</div>
+			{% endblock %}
+			{% block sidebar_div %}
+				<div id="sidebar">
+					<div id="sidebar-content">
+						{% block sidebar %}
+							<div class="sidebar-content-block">
+							<h3>Current House</h3> <p>{{ house.name }}</p><br />
+							{% if house.avatar %}
+								<img src="{{house.avatar|get_size_url:'housesidebar'}}" width="160" alt="{{house.name}}" title="{{house.name}}" /><br />
+							{% else %}
+								<img src="/site_media/img/default_house_avatar.png" width="160" alt="Default house avatar" title="{{house.name}}" /><br />	
+							{% endif %}
+							</div>
+							<div class="sidebar-content-block">
+							<a href="/lw/{{house.pk}}/settings/">House settings</a>
+							{% ifnotequal person.GetHouses|length 1 %}
+								<form action="/lw/house_redirect/" method="post">
+									<p>Switch to:</p>
+									<select name="house_redirect">
+										{% for houses in person.GetHouses %}
+											{% ifnotequal houses.id house.id %}<option value={{houses.id}}>{{ houses.name }}</option>{% endifnotequal %}
+										{% endfor %}
+									</select>
+									<input type="submit" value="go!" />
+								</form>
+							{% endifnotequal %}
+							</div>
+							
+							{# House Members #}
+							<div class="sidebar-content-block">
+							<h3>House Members</h3>
+							{% for member in house.getHouseMembers %}
+								{% if member.avatar %}
+									<img src="{{member.avatar|get_size_url:'smthumb'}}" width="20" height="20" alt="{{member.displayName}}" title="{{member.displayName}}" />
+								{% else %}
+									<img src="/site_media/img/blank_user_small.gif" width="20" height="20" alt="{{member.displayName}}" title="{{member.displayName}}" />
+								{% endif %}
+							{% endfor %}
+							<br />
+							<a href="/lw/{{house.pk}}/settings/">Invite</a>
+							</div>
+							<div class="sidebar-content-block">
+							{# FINANCIAL SNAPSHOT #}
+							<h3>Financial Snapshot</h3>
+							<a href="/lw/faq/#financial-snapshot">what is this?</a>
+							<div id="container" style="width: 175px; height: 250px" ></div>
+							</div>
+						{% endblock %}
+					</div>
+				</div>
+			{% endblock %}
+			<div id="footer">
+				<div id="footer-bar">
+					{% block footer %}
+						<a href="http://spreadsheets.google.com/viewform?formkey=dG5pRVFPa3Y5SDFDb082ekhZczZ4VGc6MQ">bug tracking</a> | <a href="http://blog.livewith.us">blog</a> | <a href="/pages/about">about</a> | <a href="/pages/faq">faq</a> | <a href="/pages/privacy">privacy</a> | copyright 2010 <a href="/">livewith.us</a>
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

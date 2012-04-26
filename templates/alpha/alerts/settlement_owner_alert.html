@@ -1,0 +1,27 @@
+{% extends "alpha/alerts/base_alert.html" %}
+{% load math_stuff %}
+
+{% block alert-content %}
+<b>Pending:</b> You requested that the house settle up. Because you are acting as banker all transactions are passing through you. The following needs to happen:<br />
+
+<b>You need to pay </b><br />
+{% for debt in alert.related_objects.settlement.debt_set.all %}
+	{% if debt.value > 0 %}
+		{% ifnotequal debt.person person %}
+			{{debt.person.displayName}}: ${{debt.value|absolutevalue}}<br />
+		{% endifnotequal %}
+	{% endif %}
+{% endfor %}
+
+<b>You should expect money from </b><br />
+
+{% for debt in alert.related_objects.settlement.debt_set.all %}
+	{% if debt.value < 0 %}
+		{% ifnotequal debt.person person %}
+			{{debt.person.displayName}}: ${{debt.value|absolutevalue}}<br />
+		{% endifnotequal %}
+	{% endif %}
+{% endfor %}
+
+
+{% endblock %}

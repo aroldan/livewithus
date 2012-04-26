@@ -1,0 +1,652 @@
+/*
+For: livewith.us
+Authors: Avery M Anderson
+Anthony L Roldan
+
+copyright 2010 livewith.us
+*/
+
+/* CSS RESET v1.0 | 20080212 */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+body {line-height: 1;}
+ol, ul {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: ''; content: none;}
+/* remember to define focus styles! */
+:focus {outline: 0;}
+/* remember to highlight inserts somehow! */
+ins {text-decoration: none;}
+del {text-decoration: line-through;}
+/* tables still need 'cellspacing="0"' in the markup */
+table {border-collapse: collapse; border-spacing: 0;}
+/* END CSS RESET */
+
+body,html { 
+	font:12px/1.4em Verdana,sans-serif;
+	
+	margin: 0;
+	padding: 0;
+	color: #000;
+	background-color:#eaeaea;
+}
+
+form p {
+	margin-top:4px;
+} 
+
+#top-bar {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:50px;
+	background-image:url('/site_media/img/background_top.png');
+	background-repeat:repeat;
+	color:#fff;
+}
+	#top-bar a{
+		color:#fff;
+	}
+	#top-bar a:visited{
+		color:#fff;
+	}
+	#top-bar-center {
+		width: 900px;
+		margin: 0px auto;
+	}
+	#top-bar-logo {
+		margin-left:0px;
+		margin-top:0px;
+		width:250px;
+		height:40px;
+		background-image:url('/site_media/img/logo_top.png');
+		background-repeat:no-repeat;
+		float:left;
+		cursor:pointer;
+	}
+
+#top-bar-nav{
+	font-size: .9em;
+	list-style:none;
+	}
+	
+	#top-bar-nav ul {
+	margin-top:0px;
+	width:100%;
+	}
+	
+	#top-bar-nav li{
+		margin-top:0px;
+		padding-top:13px;
+		padding-right:25px;
+		padding-left:15px;
+		display: block;
+		font-weight:bold;
+		background-image: url(/site_media/img/second_top_divider.png);
+		background-position:right top;
+		background-repeat: no-repeat;
+		height:40px;
+		float:left;
+		text-align:center;
+	}
+	
+	#top-bar-nav li.float-right {
+		float:right;
+		padding-right:15px;
+		padding-left:15px;
+		background-image: url(/site_media/img/second_top_divider.png);
+		background-position:left top;
+		background-repeat: no-repeat;
+	}
+	#top-bar-nav li a{
+		text-decoration:none;
+		color:#FFF;
+	}
+	#top-bar-nav img {
+		margin-top:-3px;
+	}
+	#top-bar-nav li:first-child {
+		padding-left:20px;
+	}
+.linklist {
+	list-style:none;
+}
+#login-area {
+	margin-top:12px;
+	float:right;
+	text-align:right;
+}
+#login-area p {
+	margin-top:0px;
+	display:inline;
+}
+#login-area form{
+	margin-top:0px;
+}
+
+#nav {
+	top:0px;
+	left:220px;
+	color:#fff;
+	height:35px;
+}
+#nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#nav li {
+	display:inline;
+	margin:0;
+	padding:0;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+#wrap {
+	width: 898px;
+	border-right: 1px #ccc solid;
+	border-left: 1px #ccc solid;
+	margin: 0px auto;
+	padding-top:40px;
+	clear:both;
+	background:#fff;
+}
+
+#secondary-header {
+	height:40px;
+	width:100%;
+	background:url(/site_media/img/second_top.png);
+	background-repeat:repeat-x;
+}
+
+#content {
+	margin-top:0px;
+	padding-left:20px;
+	padding-top:10px;
+	padding-bottom:30px;
+	width:650px;
+	margin:auto;
+	float:left;
+	background:#fff;
+}
+#sidebar {
+	margin-top:0px;
+	width: 180px;
+	float: right;
+	background-color:#FFECB9;
+}
+	#sidebar-content {
+		margin-left:0px;
+	}
+	#sidebar a {
+		font-size:0.9em;
+	}
+	.sidebar-content-block {
+		margin-bottom:12px;
+	}
+#footer {
+	font:11px Verdana,sans-serif; 
+
+	clear:both;
+	padding-top:25px;
+}
+#footer-bar {
+	border-top: solid #ccc 1px;
+	border-bottom: solid #ccc 1px;
+	padding-top: 13px;
+	padding-bottom: 4px;
+	
+	height:25px;
+	color:#fff;
+	background-color:#FF9C00;
+	text-align:center;
+}
+
+#footer-bar a {
+	color:#fff;
+}
+#footer-bar a:visited{
+	color:#ddd;
+}
+
+.finance-table th[scope=col]
+{
+  border-bottom: 0px;
+  border-right: 0px;
+  text-align:left;
+}
+
+.finance-date {
+	color:#555;
+	font-size:.9em;
+}
+
+a img {
+	border: 0px;
+}
+
+.finance-table { 
+	width: 100%;
+	border-collapse: collapse;  
+	border: 0px; 
+}
+.finance-table th, .finance-table td { 
+	padding: 0.5em;  
+}
+
+.finance-is-mine-icon {
+	background:#fff;
+	width:20px;
+}
+.odd-row {
+	background:#eee;
+}
+.finance-row-expanded {
+	display:none;
+}
+.finance-person-checkbox {
+	clear:both;
+}
+.finance-person-checkbox input {
+	float:left;
+}
+.finance-person-checkbox input[type=text] {
+	width:60px;
+}
+.finances-loading {
+	text-align:center;
+	color:#963;
+}
+.finance-detail-footer {
+	clear:both;
+	text-align:right;
+}
+#finance-debtor-list label {
+	
+}
+.finance-detail-cost-breakdown {
+	margin-left:20px;
+}
+.finance-detail-cost-breakdown-header {
+	font-weight:bold;
+	margin-bottom:10px;
+}
+.finance-detail-total {
+	border-top: 1px solid black;
+	padding-top: 5px;
+	width: 200px;
+}
+.finance-detail-person {
+	margin-top:5px;
+}
+	.finance-detail-person img {
+		margin-right:4px;
+		margin-top:-2px;
+		float:left;
+	}
+
+.settle {
+}
+	.settle-description {
+	}
+	.settle-contents-main {
+		width:620px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.settle-person-listing {
+		width:160px;
+		height:100%;
+		float:left;
+	}
+	.settle-person-header {
+		font-size:1.5em;
+		color:#fff;
+		padding:5px 3px 8px 7px;
+		font-weight:bold;
+	}
+	.settle-banker-listing {
+		width:290px;
+		float:left;
+		min-height:110px;
+	}
+	.settle-banker-center {
+		margin-left:20px;
+		text-align:center;
+		float:left;
+	}
+	.settle-banker-arrow-left {
+		margin-left:10px;
+		width:75px;
+		float:left;
+		min-height:110px;
+		background:url(/site_media/img/right_arrow.png) no-repeat left top;
+	}
+	.settle-banker-arrow-right {
+		margin-top:50px;
+		margin-right:10px;
+		float:right;
+		width:75px;
+		min-height:110px;
+		background:url(/site_media/img/right_arrow.png) no-repeat right top;
+	}
+	.settle-owes .settle-person-header {
+		background:#600;
+	}
+	.settle-owes.settle-person-listing {
+		background:#fcc;
+	}
+	.settle-owed .settle-person-header {
+		background:#060;
+	}
+	.settle-owed.settle-person-listing {
+		background:#cfc;
+	}
+	.settle-summary {
+		margin-top: 20px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		padding: 1px 8px 5px 10px;
+	
+		width:520px;
+		min-height:60px;
+		margin-left:auto;
+		margin-right:auto;
+		background:#cfc;
+	}
+	.settle-person-listing-person {
+		padding:5px 3px 8px 7px;	
+	}
+	.settle-form {}
+		.settle-form textarea {
+		font-family: Verdana,sans-serif;
+		font-size:0.9em;
+		height:40px;
+		width:200px;
+	}
+
+	.settle-form .settle-submit-button {
+		float:right;
+	}
+
+#alert-area {
+	padding: 5px;
+	background:#eee;
+	width:100%;
+	margin-bottom: 10px;
+}
+#alert-area img {
+	margin-right: 4px;
+}
+
+div .alert-item{
+	clear:both;
+	border-top: 1px solid orange;
+	padding-bottom: 10px;
+}
+.alert-item {
+	padding: 8px 5px 5px 5px;
+	margin-bottom: 3px;
+}
+
+.alert-item form {
+	float:right;
+}
+.clear {
+	clear:both;
+}
+#content h2 {
+	color:black;
+	clear:both;
+	padding:4px;
+	width:100%;
+	background:#dbdbdb;
+	border-bottom: 2px solid orange;
+	margin-bottom:5px;
+
+}
+
+#content p {
+	margin: 1.12em 0;
+
+}
+#content ul {
+	list-style:circle;
+}
+#content li {
+	margin-left:2em;
+}
+
+#content h3 {
+	font-size:1.1em;
+	clear:both;
+	padding:4px;
+	width:100%;
+	background:#eee;
+}
+
+.join-house-big-text {
+	background:none;
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.form-field {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.chat-area {
+}
+
+.chat-area form {
+	clear:both;
+}
+.chat-form {
+	margin-bottom:12px;
+	background:#eee;
+	padding:4px;
+}
+.chat-form-buttons-area {
+	height:25px;
+}
+.chat-form-buttons-left {
+	float:left;
+	padding-top:2px;
+	font-size:.9em;
+	font-weight:bold;
+	color:#666;
+}
+.chat-form-buttons {
+	margin-top:0px;
+	float:right;
+}
+.chat-form-poll-area {
+	display:none;
+	font-size:0.9em;
+}
+.chat-form-poll-area a {
+	color:#666;
+}
+
+.chat-form textarea {
+	font-family: Verdana,sans-serif;
+	font-size:0.9em;
+	width:595px;
+	height:30px;
+}
+
+.chat-reply-form {
+	margin-bottom:12px;
+	background:#eee;
+	padding:4px;
+	height:22px;
+	width:560px;
+}
+
+.chat-reply-form input {
+	float:left;
+}
+
+.chat-reply-form .chat-buttons {
+	margin-top: -17px;
+	float: right;
+}
+
+.chat-reply-form .chat-buttons-right {
+	margin-left:6px;
+}
+
+.chat-reply-form textarea {
+	float:left;
+	font-family: Verdana,sans-serif;
+	font-size:0.9em;
+	width:470px;
+	height:15px;
+}
+
+.chat-child {
+	margin-left: 4em;
+}
+
+.chat-child div.chat-item{
+	margin-top:2px;
+	border-top:1px solid #ddd;
+	padding-top:4px;
+}
+
+.chat-img {
+	float:left;
+	margin-right:5px;
+	margin-bottom:4px;
+}
+
+.chat-item {
+	clear:both;
+}
+.chat-time {
+	color:#777;
+	font-size:.85em;
+}
+
+#chat-button-area {
+	text-align:center;	
+}
+
+#load-chats-button {
+	color:#000;
+	font-weight:bold;
+	background-color: #FFECB9;
+	text-align:center;
+	width:50%;
+	height:40px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#load-chats-button:disabled {
+	color:#555;
+	background-color: #FFEFD6;
+}
+
+#clearbox {
+	/* spacing element, clears floating divs and adds attractive spacing above */
+	clear:both;
+	padding-top:30px;
+}
+
+#header {
+	clear:both;
+	background:#fff;
+	padding-left:5px;
+}
+#header img {
+	border:none;
+
+}
+
+
+#finance-debtor-list {
+	float:left;
+}
+#create-purchase-form-error {
+	border:1px solid red;
+	margin-left:270px;
+	padding-left:10px;
+	width:216px;
+	display:none;
+}
+#create-purchase-form-error-header {
+	background:url("/site_media/img/led-icons/stop.png") no-repeat left center transparent;
+	font-size:1.2em;
+	font-weight:bold;
+	margin-top:10px;
+	padding-left:22px;
+}
+#finance-form-end {
+	clear:both;
+}
+
+
+ 
+/* General */
+#cssdropdown, #cssdropdown ul { list-style: none; }
+#cssdropdown, #cssdropdown * { padding: 0; margin: 0; }
+	
+/* Head links */
+#cssdropdown li.headlink { 
+	width:160px;
+	float: left; 
+	margin-left: -1px; 
+	text-align: left; 
+	}
+#cssdropdown li.headlink a { 
+	display: block;
+	padding-left:10px;
+	padding-top:8px;
+	}
+#cssdropdown li.headlink a:hover { color: black; background-color: #eee; }
+ 
+/* Child lists and links */
+#cssdropdown li.headlink ul { 
+	display: none; 
+	text-align: left; 
+	background: #FF9C00;
+
+	border-left: 1px solid #ccc;
+	border-right:1px solid #ccc;
+	}
+#cssdropdown li.headlink:hover ul { 
+	display: block; 
+	}
+#cssdropdown li.headlink ul li a { color: white; padding: 5px; height: 17px; }
+#cssdropdown li.headlink ul li a:hover { color: black; background-color: #eee; }
+	
+/* Pretty styling */
+#cssdropdown a { color: white; } #cssdropdown ul li a:hover { text-decoration: none; }
+#cssdropdown li.headlink { }
+#cssdropdown li.headlink ul { 
+	background-position: bottom; 
+	border-bottom:1px solid #ccc; 
+	}
+	
+	
+/* ANALYTICS */
+
+.analytics-table {
+	vertical-align: top;
+	border: 1px solid black;
+	}
+	.analytics-table td{
+		padding: 5px 10px 5px 10px;
+		vertical-align: top;
+		border: 1px solid black;	
+	}
+	.analytics-table a{
+		text-decoration: none;
+		color: black;
+	}
+

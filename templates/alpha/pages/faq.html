@@ -1,0 +1,34 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+
+{% block addl_css %}
+<link href="/site_media/css/faq.css" rel="stylesheet" />
+{% endblock %}
+
+{% block title %} | faq{% endblock %}
+
+{% block content %}
+<h2>Livewith.us FAQ</h2>
+<p>More to come here, we're just getting started!</p>
+
+<h3 id="poll-types">Poll Types</h2>
+<p class="faq-question">What's the difference between single vote and excellence polls?</p>
+<p class="faq-answer">Single vote polls allow users to vote for one and only one option,
+	while excellence polls let users vote for as many options as they think are
+	"excellent." This can be useful in building consensus when different people in a group
+	are all okay with multiple options but have varying preferences.</p>
+	
+<h3 id="financial-snapshot">Financial Snapshot</h2>
+<p class="faq-question">What is a financial snapshot?</p>
+<p class="faq-answer">At livewith.us we treat the house almost like a bank. 
+Everytime you buy something at the store that other people in your house are
+accountable for like toilet paper or dinner you are in effect loaning the house money.
+Whenever you are included in a share of the price of something you are borrowing
+money from the house. In order to help you better understand where you stand in this
+debt/loan relationship we've created the financial snapshot graph.</p>
+<p class="faq-question">What does the financial snapshot graph mean?</p>
+<p class="faq-answer">In the financial snapshot graph you'll note that the positive side
+and the negative side sum to zero. That's because the house itself cannot be positive or
+negative. Each member of the house is listed either in the positive or negative column
+depending if they owe money or are owed money. The length of the bar represents how much
+money you owe or are owed.</p>
+{% endblock %}

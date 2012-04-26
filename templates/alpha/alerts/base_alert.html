@@ -1,0 +1,13 @@
+{% block alert-icon %}
+{# Default alert icon is "info" icon. #}
+<img src="/site_media/img/led-icons/exclamation.png" alt="Information" height="16" width="16" />
+{% endblock %}
+{% block alert-content %}
+This is a base alert!
+{% endblock %}
+
+{% block alert-form %}
+<form action="/lw/alerts/{{alert.pk}}/" method="POST">
+	<input type="submit" value="OK" />
+</form>
+{% endblock %}

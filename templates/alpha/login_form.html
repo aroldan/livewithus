@@ -1,0 +1,8 @@
+<form action="/lw/dologin/" method="post">
+	<p><b>Email: </b><input type="text" name="username" value="{{existing_user.username}}" /></p>
+	<p><b>Password: </b><input type="password" name="password" /></p>
+	{% if next %}
+	<input type="hidden" name="next" value="{{next}}" />
+	{% endif %}
+	<p><input type="submit" value="Log In" /></p>
+</form>

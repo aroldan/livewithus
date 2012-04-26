@@ -1,0 +1,43 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+
+{% block title %} | alpha | welcome {% endblock %}
+
+{% block addl_css %}
+<link type="text/css" href="/site_media/css/front_page.css" rel="stylesheet" />
+{% endblock %}
+
+{% block addl_scripts %}
+<script type="text/javascript" src="/site_media/js/front-page.js"></script>
+{% endblock %}
+
+{% block page_content_override %}
+<div id="lwu-stuff-container">
+	<div id="lwu-stuff-left">
+		<img src="/site_media/img/frontpage/home.png" width="400" />
+	</div>
+	<div id="lwu-stuff-right" onclick="location.href='/lw/signup/';" style="cursor: pointer;">
+	</div>
+</div>		
+<div id="lwu-features-select">
+	<ul id="features-select">
+	<li>Share</li>
+	<li>Organize</li>
+	<li>Decide</li>
+	</ul>
+</div>
+<div id="content">
+<h3>What is livewith.us?</h3>
+<p>Livewith.us is a web application we're building to let housemates organize and communicate more effectively.</p>
+
+<p>Most of the time, the biggest headaches roommmates have living together are based around one of two things: 
+either money or communication. Livewith.us makes both of these things easier -- it gives roommates:</p>
+
+<ul>
+	<li>an easy-to-use, simple expense sharing tool to split expenses like bills, rent, dinner, TP, whatever</li>
+	<li>threaded discussions about today to help roommates ask and answer those tough questions like
+"what's for dinner tonight?" or "who wants to come to the bar?"</li>
+
+<p>Our goal is to get groups of roommates to stop worrying "will I get paid back?" or "I wonder if anyone else wants 
+to go out tonight?" so they can do more stuff together, save money, stress out less, and generally live together better.</p>
+</div>
+{% endblock %}

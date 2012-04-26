@@ -1,0 +1,18 @@
+{% extends "alpha/base_template_analytics.html" %}
+{% load image_sizing %}
+
+
+{%block content%}
+
+	{% for chat in chats|dictsortreversed:"timeModified" %}
+		{% if chat.parent %}
+		{% else %}
+			{% include "alpha/chatter/chat.html" %}
+			<div class="chat-child">
+				{% for chat in chat.child_set.all|dictsort:"timeModified" %}
+					{% include "alpha/chatter/chat.html" %}
+				{% endfor %}
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endblock %}

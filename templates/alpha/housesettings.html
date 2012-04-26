@@ -1,0 +1,53 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+{% load image_sizing %}
+
+{% block title %} | alpha | settings {% endblock %}
+
+{% block content %}
+<h2>Settings for {{house.name}}</h2>
+
+<h3 id="invite-housemates">Invite Housemates</h3>
+<p>Need to get your other housemates set up? Enter your housemate's email
+	address below and we'll send them an invitation. No spam, we promise.</p>
+<form action="{{house.get_absolute_url}}invite_housemates/" method="post">
+	{{invite_form.email.errors}}
+	{{invite_form.email.label}}: {{invite_form.email}}
+	<input type="submit" value="Invite" />
+</form>
+<br />
+<h3>House Settings</h3>
+<form action="{{house.get_absolute_url}}apply_house_settings/" method="post" enctype="multipart/form-data">
+	{% for field in settings_form %}
+	  <div class="form-field">
+	  {% ifequal field.name "avatar" %}
+	  	{% if house.avatar %}
+	  	<img src="{{house.avatar|get_size_url:'settingsthumb'}}" width="45" height="45" />
+	  	{% else %}
+		<img src="/site_media/img/default_house_avatar.png" width="45" height="45" alt="Default house avatar" title="23 Packard"
+	  	{% endif %}
+	  {% endifequal %}
+	    {{ field.errors }}
+	    {{ field.label_tag }}: {{ field }}
+    </div>
+    {% endfor %}
+	<input type="submit" value="Save" />
+</form>
+<br />
+{% for settings in active_settings %}
+<h3>{{settings.utility.name}} Settings</h3>
+{{settings.settings}}
+{% include settings.get_house_settings_template %}
+<br />
+{% endfor %}
+{% if inactive_utilities %}<h3>Add Utilities to Your House</h3>
+<p>Utilities are plugins for your house that interact with the normal livewith.us
+components to allow your household to operate more effectively</p>
+<table>
+{% for utility in inactive_utilities %}
+<tr>
+{% include utility.summary_template %}
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+{% endblock %}

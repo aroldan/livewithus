@@ -1,0 +1,23 @@
+#newhouse {
+	text-align:center;
+	height: 340px;
+	
+	border: 2px solid black;
+	
+	margin-left:20px;
+	padding-top:10px;
+	width: 250px;
+	float:left;
+}
+#joinhouse {
+	text-align:center;
+	min-height:340px;
+	padding-top:10px;
+	padding-bottom:10px;
+	
+	border: 2px solid black;
+	
+	width: 250px;
+	float:right;
+	
+}

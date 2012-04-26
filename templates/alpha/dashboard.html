@@ -1,0 +1,132 @@
+{% extends "alpha/base_template.html" %}
+
+{% block addl_scripts %}
+<script type="text/javascript">
+	var chats_to_load = 10;
+	
+	//show the poll area
+	function show_poll_area() {
+		$("#new-chat-form-buttons").hide('fast');
+		$("#new-chat-form-poll").show('fast');
+		$("#new-chat-form-poll [name='as_poll']").attr('value', 'true');
+		$("#new-chat-form [name='text']").animate({
+			height: '200px'
+		}, 'fast');
+	}
+	
+	//hide the poll area
+	function hide_poll_area() {
+		$("#new-chat-form-buttons").show('fast');
+		$("#new-chat-form-poll").hide('fast');
+		$("#new-chat-form-poll [name='as_poll']").attr('value', 'false');
+		$("#new-chat-form [name='text']").animate({
+			height: '30px'
+		}, 'fast');
+	}
+	
+	function load_chatter_done() {
+		$("#load-chats-button").removeAttr('disabled');
+		
+		if(chats_to_load > {{older_chat_count}}) {
+			$("#load-chats-button").hide();
+		}
+	}
+	
+	function load_more_chatter() {
+		$("#load-chats-button").attr('disabled', 'true');
+		chats_to_load = chats_to_load + 5;
+		
+		$("#chat-bottom").load('/lw/{{house.pk}}/chatter/more/', {end:chats_to_load}, load_chatter_done)
+	}
+	
+	
+$(document).ready(function() {
+	$("#new-chat-form-poll-button").click(show_poll_area);
+	$("#new-chat-cancel-poll").click(hide_poll_area);
+	$("#load-chats-button").click(load_more_chatter);
+	
+	if({{older_chat_count}} <= 5) {
+		$("#load-chats-button").hide();
+	}
+ });
+</script>
+{% endblock %}
+
+{% block title %} | alpha | dashboard {% endblock %}
+
+{% block content %}
+
+	{% if alerts %} 
+		{% if alerts|length_is:"0" %}
+		<!-- no alerts -->
+		{% else %}
+		<div id="alert-area">
+		{% block alert-area %}
+		<p>
+		<img src="/site_media/img/led-icons/error.png" alt="Alerts!" height="16" width="16" />Hey {{person.displayName}}, just a heads up:
+		</p>
+		{% for alert in alerts %}
+		<div class="alert-item">
+			{% include alert.get_template_url %}
+		</div>
+		{% endfor %}
+		
+		
+		{% endblock %} 
+		</div>
+		{% endif %}
+	{% endif %}
+	
+	{# CHATTER PIECES #}
+	<div class="chat-area">
+	{# STICKY #}
+	{% if sticky_chats %}<h2>Ongoing Conversations</h2>{% endif %}
+	{% for chat in sticky_chats|dictsortreversed:"timeModified" %}
+		{% if chat.parent %}
+		{% else %}
+			{% include "alpha/chatter/chat.html" %}
+			<div class="chat-child">
+				{% for chat in chat.child_set.all|dictsort:"timeModified" %}
+					{% include "alpha/chatter/chat.html" %}
+				{% endfor %}
+				{% include "alpha/chatter/chat_form.html" %}
+			</div>
+			<br /><br />
+		{% endif %}
+	{% endfor %}
+	{# TODAY #}
+	<h2>Today</h2>
+	{% include "alpha/chatter/chat_form.html" %}
+	{% for chat in todays_chats|dictsortreversed:"timeModified" %}
+		{% if chat.parent %}
+		{% else %}
+			{% include "alpha/chatter/chat.html" %}
+			<div class="chat-child">
+				{% for chat in chat.child_set.all|dictsort:"timeModified" %}
+					{% include "alpha/chatter/chat.html" %}
+				{% endfor %}
+				{% include "alpha/chatter/chat_form.html" %}
+			</div>
+		{% endif %}
+	{% endfor %}
+	{# OLDER #}
+	{% if older_chats %}<h2>Older</h2>{% endif %}
+	{% for chat in older_chats|dictsortreversed:"timeModified" %}
+		{% if chat.parent %}
+		{% else %}
+			{% include "alpha/chatter/chat.html" %}
+			<div class="chat-child">
+				{% for chat in chat.child_set.all|dictsort:"timeModified" %}
+					{% include "alpha/chatter/chat.html" %}
+				{% endfor %}
+				{% include "alpha/chatter/chat_form.html" %}
+			</div>
+		{% endif %}
+	{% endfor %}
+	<div id="chat-bottom">
+	</div>
+	</div>
+	<div id="chat-button-area">
+	<button id="load-chats-button">Show More</button>
+	</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% load humanizetime %}
+
+
+<div class="chat-item">
+	<img src="{{chat.get_avatar}}" width="30" height="30" title="Dinner" alt="Dinner" />
+	<b>{{chat.text}}</b><br />
+	<span class="chat-time">{{chat.timeCreated|naturalTimeDifference}}</span>
+	[<a href="/lw/{{house.pk}}/chatter/{{chat.pk}}/delete/">x</a>]
+	<table>
+		<tr>
+			<th></th>
+
+			<th>
+				Eating
+			</th>
+			<th>
+				Cooking
+			</th>
+			<th>
+				Skipping
+			</th>
+
+		</tr>
+		{% for member in house.getHouseMembers %}
+		{% ifnotequal member person %}
+		<tr>
+			<td>
+				<img src="{{member.get_sm_avatar}}" width="20" height="20" title="{{member.displayName}}" alt="{{member.displayName}}"/>
+			</td>
+				<td>
+					<input type="radio" name="poll_{{chat.pk}}_for_{{member.pk}}" {% if member.pk in chat.get_eaters %}checked {% endif %} disabled /></td>
+				</td>
+				<td>
+					<input type="radio" name="poll_{{chat.pk}}_for_{{member.pk}}" {% if member.pk in chat.get_cookers %}checked {% endif %} disabled /></td>
+				</td>
+				<td>
+					<input type="radio" name="poll_{{chat.pk}}_for_{{member.pk}}" {% if member.pk in chat.get_skippers %}checked {% endif %} disabled /></td>
+				</td>
+				
+		</tr>
+		{% endifnotequal %}
+		{% endfor %}
+		
+
+		<tr>
+			<td>
+				<img src="{{person.get_sm_avatar}}" width="20" height="20" title="{{person.displayName}}" alt="{{person.displayName}}"/>
+			</td>
+			<form action="/lw/utilities/dinner/pollhandler/" method="post">
+				<input type="hidden" value="{{chat.pk}}" name="poll_id" />
+				<input type="hidden" value={{house.pk}} name="house_id" id="id_house" />			
+				<td>
+					<input type="radio" name="poll_{{chat.pk}}_for_{{person.pk}}" value="E" {% if person.pk in chat.get_eaters %}checked {% endif %}  /></td>
+				</td>
+				<td>
+					<input type="radio" name="poll_{{chat.pk}}_for_{{person.pk}}" value = "C" {% if person.pk in chat.get_cookers %}checked {% endif %}  /></td>
+				</td>
+				<td>
+					<input type="radio" name="poll_{{chat.pk}}_for_{{person.pk}}" value = "S" {% if person.pk in chat.get_skippers %}checked {% endif %}  /></td>
+				</td>		
+
+		</tr>
+
+
+		
+	</table>
+	
+	<input type="submit" value="Vote" />
+			</form>
+</div>
+
+
+
+
+
+
+

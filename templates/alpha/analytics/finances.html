@@ -1,0 +1,29 @@
+{% extends "alpha/base_template_analytics.html" %}
+{% load image_sizing %}
+
+{%block content%}
+
+<table class="finance-table">
+	<tr>
+		<th scope="col">
+			Purchaser
+		</th>
+		<th scope="col">
+			<b>Date</b>
+		</th>
+		<th scope="col">
+			<b>Vendor</b>
+		</th>
+		<th scope="col">
+			<b>Item</b>
+		</th>
+		<th scope="col">
+			Total
+		</th>
+	</tr>
+{% for purchase in purchases %}
+	{% include "alpha/analytics/transaction_display.html" %}
+{% endfor %}
+</table>
+
+{% endblock %}

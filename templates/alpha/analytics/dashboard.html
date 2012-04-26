@@ -1,0 +1,52 @@
+{% extends "alpha/base_template_analytics.html" %}
+{% load image_sizing %}
+
+{%block content%}
+<table class="analytics-table">
+
+{% for h in houses %}
+<tr>
+	<td>
+		<a href="/analytics/{{h.pk}}/">
+		{% if house.avatar %}
+			<img src="{{house.avatar|get_size_url:'housesidebar'}}" width="160" /><br />
+		{% else %}
+			<img src="/site_media/img/default_house_avatar.png" width="160" /><br />	
+		{% endif %}
+		<strong>{{h.name}}</strong><br />
+		</a>
+	</td>
+	<td>
+		{% for member in h.getHouseMembers %}
+			{% if member.avatar %}
+				<img src="{{member.avatar|get_size_url:'smthumb'}}" width="20" height="20"  />
+			{% else %}
+				<img src="/site_media/img/blank_user_small.gif" width="20" height="20"  />
+			{% endif %}
+			{{member.displayName}}<br />
+		{% endfor %}
+	</td>
+	<td>
+		{% if h.active_settings %}
+			{% for s in h.active_settings %}
+				{{s.utility.name}}<br />
+			{% endfor %}	
+		{% else %}
+			No Active Settings
+		{% endif %}
+	</td>
+	<td>
+		Chats/Month: {{h.chats}}<br />
+		Transactions/Month: {{h.purchases}}<br />
+		$ Spent/Month: {{h.dollars}}<br />
+		----------------<br />
+		Total Chats: {{h.totalchats}}<br />
+		Total Transactions: {{h.totalpurchases}}<br />
+		Total $ Spent: {{h.totaldollars}}<br />
+	</td>
+	
+</tr>
+
+{% endfor %}
+</table>
+{%endblock%}

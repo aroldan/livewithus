@@ -1,0 +1,36 @@
+<p>Want to organize who's eating, cooking, or skipping a meal in your house
+during the day? The Dinner Utility allows housemates to coordinate their meal
+efforts so four people don't have to cook four separate meals.</p>
+<p>Choose a time for your housemates to get emailed reminders to check in for dinner.</p>
+<form action="lw/utilities/dinner/house_settings_handler/" method="post">
+	<select name="push_hour">
+		<option value=0 {% ifequal settings.push_hour 0 %} SELECTED {% endifequal %}>12 am</option>
+		<option value=1 {% ifequal settings.push_hour 1 %} SELECTED {% endifequal %}>1 am</option>
+		<option value=2 {% ifequal settings.push_hour 2 %} SELECTED {% endifequal %}>2 am</option>
+		<option value=3 {% ifequal settings.push_hour 3 %} SELECTED {% endifequal %}>3 am</option>
+		<option value=4 {% ifequal settings.push_hour 4 %} SELECTED {% endifequal %}>4 am</option>
+		<option value=5 {% ifequal settings.push_hour 5 %} SELECTED {% endifequal %}>5 am</option>
+		<option value=6 {% ifequal settings.push_hour 6 %} SELECTED {% endifequal %}>6 am</option>
+		<option value=7 {% ifequal settings.push_hour 7 %} SELECTED {% endifequal %}>7 am</option>
+		<option value=8 {% ifequal settings.push_hour 8 %} SELECTED {% endifequal %}>8 am</option>
+		<option value=9 {% ifequal settings.push_hour 9 %} SELECTED {% endifequal %}>9 am</option>
+		<option value=10 {% ifequal settings.push_hour 10 %} SELECTED {% endifequal %}>10 am</option>
+		<option value=11 {% ifequal settings.push_hour 11 %} SELECTED {% endifequal %}>11 am</option>
+		<option value=12 {% ifequal settings.push_hour 12 %} SELECTED {% endifequal %}>12 pm</option>
+		<option value=13 {% ifequal settings.push_hour 13 %} SELECTED {% endifequal %}>1 pm</option>
+		<option value=14 {% ifequal settings.push_hour 14 %} SELECTED {% endifequal %}>2 pm</option>
+		<option value=15 {% ifequal settings.push_hour 15 %} SELECTED {% endifequal %}>3 pm</option>
+		<option value=16 {% ifequal settings.push_hour 16 %} SELECTED {% endifequal %}>4 pm</option>
+		<option value=17 {% ifequal settings.push_hour 17 %} SELECTED {% endifequal %}>5 pm</option>
+		<option value=18 {% ifequal settings.push_hour 18 %} SELECTED {% endifequal %}>6 pm</option>
+		<option value=19 {% ifequal settings.push_hour 19 %} SELECTED {% endifequal %}>7 pm</option>
+		<option value=20 {% ifequal settings.push_hour 20 %} SELECTED {% endifequal %}>8 pm</option>
+		<option value=21 {% ifequal settings.push_hour 21 %} SELECTED {% endifequal %}>9 pm</option>
+		<option value=22 {% ifequal settings.push_hour 22 %} SELECTED {% endifequal %}>10 pm</option>
+		<option value=23 {% ifequal settings.push_hour 23 %} SELECTED {% endifequal %}>11 pm</option>
+	</select>
+	<input type="hidden" value={{house.pk}} name="house_id" />
+	<input type="submit" value="Save" />
+</form>
+<p>Tried the Dinner Utility out for a while and found it wasn't for your house? </p>
+<form action="lw/utilities/dinner/deactivate/" method="post"><input type="hidden" value={{house.pk}} name="house_id" /><input type="submit" value="Deactivate" /></form>

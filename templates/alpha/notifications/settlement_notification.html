@@ -1,0 +1,6 @@
+{% extends "alpha/notifications/base_email_template.html" %}
+{% block content %}
+<p>Hey! {{ac.creator.displayName}} has requested that your house settle out. Please visit <a href="http://livewith.us/lw/">livewith.us</a> to complete this transaction.</p>
+
+<p>Reply by going to <a href="http://livewith.us/lw/{{ac.house.id}}/">"http://livewith.us/lw/{{ac.house.id}}/</a>.</p>
+{% endblock %}

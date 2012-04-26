@@ -1,0 +1,30 @@
+{% load humanizetime %}
+{% if chat.get_template_url %}{# if there is a special rendering function, display that instead #}
+	{% include chat.get_template_url %}
+{% else %}{# if not, display chatters as they usually are done #}
+	{% if chat.publicly_editable %}
+	<form action="/lw/savewikihandler/" method="post">
+		<img src="{{chat.get_avatar}}" width="30" height="30" />
+		Wiki post:
+		<br /> 
+		<textarea cols="60" rows="2" name="text">{{chat.text}}</textarea><br />
+		<input type="hidden" value="{{chat.pk}}" name="chat" id="id_chat" />
+    	<input type="hidden" value="{{house.pk}}" name="house" id="id_house" />
+		<input type="submit" value="Save" />
+	</form>
+	{% else %}
+	<div class="chat-item">
+		<img class="chat-img" src="{{chat.get_avatar}}" width="30" height="30" />
+		{{chat.text|urlize|linebreaks}}
+		<span class="chat-time">{{chat.timeCreated|naturalTimeDifference}}</span>
+		{% ifequal chat.creator.downcast person %}[<a href="/lw/{{house.pk}}/chatter/{{chat.pk}}/delete/">x</a>]{% endifequal %}
+		{% if not chat.parent %}{# only allow stickying base chats #}
+			{% if chat.sticky %}
+			[<a href="/lw/{{house.pk}}/chatter/{{chat.pk}}/unstick/">unstick</a>]
+			{% else %}
+			[<a href="/lw/{{house.pk}}/chatter/{{chat.pk}}/stick/">stick</a>]
+			{% endif %}
+		{%endif%}
+	</div>
+	{% endif %}
+{% endif %}

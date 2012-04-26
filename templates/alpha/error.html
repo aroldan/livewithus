@@ -1,0 +1,14 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+
+{% block title %} | alpha | logged out {% endblock %}
+
+{% block content %}
+		<p>
+		Error servicing request.
+		</p>
+		 {% for e in exception_text %}
+		<p>
+			{{e}}
+		</p>
+		{% endfor %}
+{% endblock %}

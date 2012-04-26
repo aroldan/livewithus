@@ -1,0 +1,18 @@
+<div class="finance-detail-cost-breakdown">
+	<div class="finance-detail-cost-breakdown-header">
+		Cost Breakdown
+	</div>
+	<div class="finance-detail-person-list">
+		{% for debt in purchase.get_all_debts %}
+		<div class="finance-detail-person">
+		<img src="{{debt.person.get_sm_avatar}}" alt="{{debt.person.displayName}}: ${{debt.amount}}" title="{{debt.person.displayName}}: ${{debt.amount}}" width="20" height="20" /> ${{debt.amount}}
+		</div>
+		{% endfor %}	
+	</div>
+	<div class="finance-detail-total">
+		= ${{purchase.amount}}<span class="finance-detail-type">{% if purchase.creator.downcast == user.get_profile %} paid by you{%else%} spent by <img src="{{purchase.creator.downcast.get_sm_avatar}}" alt="{{purchase.creator.downcast.displayName}}: ${{purchase.amount}}" title="{{purchase.creator.downcast.displayName}}: ${{purchase.amount}}" width="20" height="20" />{% endif %}</span>
+	</div>
+</div>
+<div class="finance-detail-footer">
+	<a class="finance-detail-edit-button" href="{{house.get_absolute_url}}finances/edit/{{purchase.pk}}/">Edit</button>
+</div>

@@ -1,0 +1,11 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+{% block content %}
+		<p>
+			Hey! Looks like you already have a livewith.us account. Log in below:
+		</p>
+		{% include "alpha/login_form.html" %}		
+		<p>
+			If you've forgotten your password, <a href="/signup/forgotpassword">click here</a> to have it reset.
+		</p>
+		
+{% endblock %}

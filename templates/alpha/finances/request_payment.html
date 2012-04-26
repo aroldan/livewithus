@@ -1,0 +1,27 @@
+{% extends "alpha/base_template.html" %}
+
+{% block title %} | alpha | finances {% endblock %}
+
+{% block content %}
+{% if house.getHouseMembers|length_is:"1" %}
+<h2>Request Payment</h2>
+Before you can report payments, you have to <a href="/lw/{{house.pk}}/settings/">invite more housemates</a> to report them to!
+{% else %}
+<form action="{{house.get_absolute_url}}finances/request_payment_handler/" method="post">
+<h2>Request Payment</h2>
+{# TODO move select into form #}
+From:<select name="payment_from">
+{% for member in house.getHouseMembers %}
+	{% ifnotequal member person %}
+		<option value={{ member.pk }}>{{ member.displayName }}</option>
+	{% endifnotequal %}
+{% endfor %}
+
+</select><br />
+
+Amount: ${{ payform.amount }}<br />
+Regarding: {{ payform.description }}<br />
+<a href="{{house.get_absolute_url}}finances/all"><button type="button">Cancel</button></a><input type="submit" value="OK" />
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "alpha/notifications/base_email_template.html" %}
+{% block content %}
+<p>Hey! {{ac.creator.displayName}} has posted a new poll in your house. Add to the conversation--what do you think?</p>
+
+<p>{{ac.text|urlize|linebreaks}}</p>
+
+<p>Vote or reply by going to <a href="http://livewith.us/">"http://livewith.us/</a>.</p<
+{% endblock %}

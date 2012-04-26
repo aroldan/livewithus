@@ -1,0 +1,89 @@
+{% extends "alpha/base_template.html" %}
+
+{% block title %} | alpha | {% if purchase %}edit transaction{% else %}add transaction{% endif %} {% endblock %}
+
+{% block addl_scripts %}
+<script type="text/javascript">
+{% if purchase %}
+	$(document).data("editing", "true");
+{% else %}
+	$(document).data("editing", "false");
+{% endif %}
+</script>
+<script type="text/javascript" src="/site_media/js/jquery.formatCurrency-1.4.0.min.js"></script>
+<script type="text/javascript" src="/site_media/js/finance-item.js"></script>
+{% endblock %}
+
+{% block content %}
+<script type="text/javascript">
+$(function() {
+	$("#id_purchase_date").datepicker({showOtherMonths: true, selectOtherMonths: true});
+});
+</script>
+<script type="text/javascript">
+$(function() {
+{# todo this may leave us open for "injections" whatever those are. supposed to tighten it up with JSON #}
+	var availableVendors = {{vendors|safe}};
+	$("#id_vendorText").autocomplete({
+		source: availableVendors
+	});
+});
+</script>
+
+{% if add %}
+<h2>Enter a New Purchase</h2>
+<form action="{{house.get_absolute_url}}finances/new_purchase_handler/" method="post" id="create-purchase-form">
+{% else %}
+<h2>Edit Your Purchase</h2>
+{% ifequal purchase.get_creator person %}
+<a href="{{house.get_absolute_url}}finances/delete/{{purchase.pk}}" ><button>Delete Transaction</button></a>
+{% endifequal %}
+<form action="{{house.get_absolute_url}}finances/edit_purchase_handler/{{purchase.pk}}/" method="post" id="create-purchase-form">
+<p>Purchased by <img src="{{purchase.get_creator_avatar}}" width="20" height="20" /> {{purchase.get_creator.displayName}}</p>
+{% endif %}
+
+<p>Vendor: {{form.vendorText}}</p>
+<p>Date: {{ form.purchase_date }}</p>
+<p>Description: {{ form.description}} </p>
+{% if purchase %}
+<p>Amount: {{ form.amount }}</p>
+{% else %}
+<p>Amount: <input type="text" name="amount" id="id_amount" value="$0.00" /></p>
+{% endif %}
+<div id="finance-debtor-list">
+	<div id="finance-even-split">
+		<input type="checkbox" name="even_split" {% if not purchase %}checked="yes"{%endif%}/> Split expense evenly
+	</div>
+
+	{# display the current user first, then the rest #}
+	<div class="finance-person-checkbox">
+		<input type="checkbox" name="included" value="{{ person.pk }}" {% if person|hasDebt:purchase.pk %}checked="yes"{% endif %}/>
+		<input class="finance-person-amount" type="text" name="amount_{{person.pk}}" {% if person|hasDebt:purchase.pk %}value="{{person|hasDebt:purchase.pk}}"{% endif %}/>
+		<label><img src="{{person.get_avatar}}" width="20" height="20" />include me</label>
+		
+	</div>
+	{% for member in house.people.all %}
+	{% if member.pk != person.pk %}
+	<div class="finance-person-checkbox">
+		<input type="checkbox" name="included" value="{{ member.pk }}" {% if member|hasDebt:purchase.pk %}checked="yes"{% endif %}/>
+		<input class="finance-person-amount" type="text" name="amount_{{member.pk}}" {% if member|hasDebt:purchase.pk %}value="{{member|hasDebt:purchase.pk}}"{% endif %}/>
+		<label><img src="{{member.get_avatar}}" width="20" height="20" />{{member.displayName}}</label>
+	</div>
+	{%endif%}
+	{% endfor %}
+</div>
+<div id="create-purchase-form-error">
+<div id="create-purchase-form-error-header">Uh oh!</div>
+<div>The total purchase amount total is <span class="current-total"></span>.</div>
+<ul>
+<li><a id="link-revise-total" href="">Revise total to match</a></li>
+<li><a id="link-reset-amounts" href="">Reset amounts to even split</a></li>
+</ul>
+</div>
+<div id="finance-form-end">
+	<p><a href="" id="link-include-everyone">include everyone</a></p>
+	<input type="submit" value="Submit" />
+</div>
+</form>
+
+{% endblock %}

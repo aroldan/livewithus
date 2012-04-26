@@ -1,0 +1,14 @@
+{% extends "alpha/alerts/base_alert_nobutton.html" %}
+{% block alert-content %}
+{{alert.related_objects.person}} has requested ${{alert.related_objects.amount}}{% if alert.related_objects.description %} regarding {{alert.related_objects.description}}{% endif %}.<br />
+
+<form action="/lw/alerts/{{alert.pk}}/refuse/" method="POST">
+	<input type="submit" value="Refuse" />
+	<input type="hidden" value={{alert.pk}}>
+</form>
+<form action="/lw/alerts/{{alert.pk}}/pay/" method="POST">
+	<input type="submit" value="Report Payment" />
+	<input type="hidden" value={{alert.pk}}>
+</form>
+
+{% endblock %}

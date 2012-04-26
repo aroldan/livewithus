@@ -1,0 +1,16 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+{% block content %}
+
+<h2>Welcome to livewith.us!</h2>
+		
+<p>
+	Enter your details below to sign up.
+</p>
+<p>
+	To join, an authorization code is required -- we're limiting signups until we're sure verything is working just so. Don't have a code? <a href="mailto:info@livewith.us">Email us</a> to request one. Thanks for your patience as we get livewith.us up!
+</p>
+	<form action="/lw/do_signup/" method="post">
+	{{form.as_p}}
+	<input type="submit" value="Sign Up!" />
+	</form>
+{% endblock %}

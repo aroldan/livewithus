@@ -1,0 +1,43 @@
+{% extends "alpha/base_template.html" %}
+
+{% block title %} | alpha | finances {% endblock %}
+
+{% block content %}
+{% if house.getHouseMembers|length_is:"1" %}
+<h2>Report Payment</h2>
+Before you can report payments, you have to <a href="/lw/{{house.pk}}/settings/">invite more housemates</a> to report them to!
+{% else %}
+{% if add %}
+	{% if alert_boolean %}
+		<form action="/lw/alerts/{{alert.pk}}/pay_complete/" method="post" />
+		<input type="hidden" value={{alert.pk}} />
+	{% else %}
+		<form action="{{house.get_absolute_url}}finances/report_payment_handler/" method="post" />
+	{% endif %}
+	<h2>Report Payment</h2>
+		{% else %}
+	<form action="{{house.get_absolute_url}}finances/edit_payment_handler/" method="post" />
+	<input type="hidden" name="settlement" value={{settlement}} />
+	<h2>Edit Payment</h2>
+{% endif %}
+{# TODO move select into form #}
+To:<select name="payment_to">
+{% for member in house.getHouseMembers %}
+	{% ifnotequal member person %}
+		{% if add %}
+		<option value={{ member.pk }} {% ifequal payee member.pk %}SELECTED{% endifequal %}> {{ member.displayName}} </option>
+		{% else %}
+		<option value={{ member.pk }} {% ifequal member payer %} SELECTED {% endifequal %}> {{ member.displayName}} </option>
+		{% endif %}
+	{% endifnotequal %}
+{% endfor %}
+
+
+</select><br />
+
+Amount: ${{ payform.amount }}<br />
+Regarding: {{ payform.description }}<br />
+<a href="{{house.get_absolute_url}}finances/all"><button type="button">Cancel</button></a><input type="submit" value="OK" />
+</form>
+{% endif %}
+{% endblock %}

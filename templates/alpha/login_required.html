@@ -1,0 +1,10 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+
+{% block title %} | alpha | logged out {% endblock %}
+
+{% block content %}
+	You must be logged in to complete that action. Log in below:
+	
+	{% include "alpha/login_form.html" %}
+
+{% endblock %}

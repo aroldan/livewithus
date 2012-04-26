@@ -1,0 +1,38 @@
+{% if chat %}{# FOR REPLIES #}
+<form action="/lw/chathandler/" method="post" class="chat-reply-form" id="chat-reply-form-{{chat.pk}}">
+	<img class="chat-img" src="{{person.get_sm_avatar}}" width="20" height="20" />
+    {{ form.text }}<br />
+    {% if chat %}<input type="hidden" value="{{chat.pk}}" name="parent" id="id_parent" />{% endif %}
+    <input type="hidden" value="{{house.pk}}" name="house" id="id_house" />
+    <div class="chat-buttons">
+	<input type="submit" value="Reply" />
+	</div>
+</form>
+{% else %}{# FOR TOP-LEVEL CHATS #}
+<form action="/lw/chathandler/" method="post" class="chat-form" id="new-chat-form">
+	<img class="chat-img" src="{{person.get_avatar}}" width="30" height="30" />
+    {{ form.text }}<br />
+	<input type="hidden" value="{{chat.pk}}" name="parent" id="id_parent" />
+    <input type="hidden" value="{{house.pk}}" name="house" id="id_house" />
+    <div class="chat-form-buttons-area" id="new-chat-form-buttons">
+    <div class="chat-form-buttons-left">
+    	Advanced:
+    	<a id="new-chat-form-poll-button"><img src="/site_media/img/led-icons/chart_bar.png" title="Create a poll"  /></a>
+    </div>
+    <div class="chat-form-buttons">
+	<input type="submit" value="Post" />
+	</div>
+	</div>
+	<div class="chat-form-poll-area" id="new-chat-form-poll">
+		One poll option per line, first line is the poll question.<br />
+		<input type="hidden" name="as_poll" value="false" />
+		Poll type: <select name="poll-type">
+			<option>Excellence</option>
+			{%comment%}<option>Single Vote</option>{%endcomment%}
+		</select> <a href="/lw/faq/#poll-types">what is this?</a>
+		<div class="chat-form-buttons">
+		<input type="button" id="new-chat-cancel-poll" value="Cancel" /></a><input type="submit" value="Create Poll">
+		</div>
+	</div>
+</form>
+{% endif %}

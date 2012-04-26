@@ -1,0 +1,27 @@
+{% extends "alpha/base_template_nosidebar.html" %}
+{% block nav-area %}
+{% endblock %}
+{% block addl_css %}
+<link href="/site_media/css/house.css" rel="stylesheet" />
+{% endblock %}
+{% block content %}
+		{% if houses %}
+		<p>
+			Did you mean to to log in to:
+			<select>
+			{% for house in houses %}
+			<option>{{ house.name }}</option>
+			{% endfor %}
+			</select>
+		</p>
+		{% else %}
+		{% if signup %}
+		<h3>Cool! Thanks for signing up.</h3>
+		{% endif %}
+		<p>
+			To use livewith.us, you need to create or join a house.
+			You can only share expenses and information with people in your house.
+		</p>
+		{% endif %}		
+	{% include "alpha/signup/create_or_join_house.html" %}
+{% endblock %}

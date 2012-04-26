@@ -1,0 +1,12 @@
+{% extends "alpha/emails/base_email_template.html" %}
+{% block content %}
+<p>Hey {{ac.email}},</p>
+
+<p>{{ac.get_sender_name}} had said that you live with them at {{ac.house.name}} and would like to share finances,
+communications, and planning with you on livewith.us. If you live with {{ac.person.displayName}}, click
+the link below or copy it into your browser's location bar to join them!</p>
+
+The authentication code to join is: steak
+
+<p><a href="http://livewith.us/lw/join/{{ac.inviteString}}">http://livewith.us/lw/join/{{ac.inviteString}}</a></p>
+{% endblock %}

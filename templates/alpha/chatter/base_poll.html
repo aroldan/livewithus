@@ -1,0 +1,42 @@
+{% load image_sizing %}
+{% load humanizetime %}
+
+<img src="{{chat.get_avatar}}" width="30" height="30" />
+<b>{{chat.text}}</b><br />
+<span class="chat-time">{{chat.timeCreated|naturalTimeDifference}}</span>
+{% ifequal chat.creator.downcast person %}[<a href="/lw/{{house.pk}}/chatter/{{chat.pk}}/delete/">x</a>]{% endifequal %}
+<table>
+<tr>
+<td></td>
+{% for o in chat.option_set.all %}
+<td>{{o.option_text}}</td>
+{% endfor %}
+</tr>
+{% for member in house.getHouseMembers %}
+	{% ifnotequal member person %}
+	<tr>
+		<td>
+		<img src="{{member.get_sm_avatar}}" width="20" height="20" />
+		</td>
+		{% for o in chat.option_set_with_people %}
+		<td><input type="checkbox" name="poll_choice" value="{{o.pk}}" {% if member in o.list %}checked {% endif %}disabled /></td>
+		{% endfor %}
+	</tr>
+	{% endifnotequal %}
+{% endfor %}
+<tr>
+	<td>
+		<img src="{{person.get_sm_avatar}}" width="20" height="20" />
+	</td>
+<form action="/lw/pollhandler/" method="post">
+	<input type="hidden" value="{{chat.pk}}" name="poll_id" />
+	<input type="hidden" value={{house.pk}} name="house_id" id="id_house" />
+	{% for o in chat.option_set_with_people %}
+		<td>
+		<input type="checkbox" name="poll_choice" value="{{o.pk}}" {% if person in o.list %}checked {% endif %} />
+		</td>
+	{% endfor %}
+</tr>
+</table>
+<input type="submit" value="Vote" />
+</form>
